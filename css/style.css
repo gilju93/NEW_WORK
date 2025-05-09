@@ -1,0 +1,102 @@
+/* FontStyle */
+
+.font1 {
+    font-family: "Mr Bedfort", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+/* FontSetting */
+
+.text1 {
+    font-size: 30pt;
+    color: black ;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    padding-top: 40px;
+    margin: 20px;
+    
+}
+
+.text2 {
+    font-size: 30pt;
+    color: slategray ;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 20px;
+}
+
+.text3 {
+    font-size: 15pt;
+    color: lightslategray ;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    margin: 20px;
+}
+
+.text4 {
+    font-size: 0.9rem;
+    color: black ;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Make Sapce */
+
+.space1 {
+    width: auto;
+    height: 5vh;
+    border-radius: 10px;
+}
+
+.space2 {
+    margin: 80px;
+}
+
+.space3 {
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+/* flex */
+
+.flex1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* animation */
+
+
+
+@keyframes snow-fall{
+    0% {
+        transform: translate(-50px, -100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+}
+
+.animation0 {
+    opacity: 0;
+    animation: snow-fall 2s ease-out forwards;
+}
+
+.animation1 {
+    opacity: 0;
+    animation: snow-fall 2s ease-out 1.5s forwards;
+}
+
+.animation2 {
+    opacity: 0;
+    animation: snow-fall 2s ease-out 3s forwards;
+}
