@@ -2,45 +2,99 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mr+Bedfort&display=swap" rel="stylesheet">
   <title>작업 완료 일정 계산기</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      display: flex; justify-content: center; align-items: center;
-      height: 100vh; margin: 0; background: #f4f4f4;
+      display: flex;
+      flex-direction: column;       /* 세로 배치 */
+      align-items: center;          /* 가로 중앙 정렬 */
+      justify-content: flex-start;  /* 위에서부터 쌓기 */
+      min-height: 100vh;
+      margin: 0;
+      background: #f4f4f4;
+      padding-top: 20px;            /* 상단 여유 */
+      box-sizing: border-box;
     }
+    .font1 { font-family: "Mr Bedfort", cursive; }
+    .text1 {
+      font-size: 30px;
+      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .space1 { height: 20px; }
     .container {
-      background: #fff; padding: 20px; border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 320px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 320px;
       text-align: left;
     }
     h1 { text-align: center; margin-bottom: 10px; }
     form { display: flex; flex-direction: column; gap: 8px; }
     label { font-size: 14px; }
     input, select, button {
-      padding: 8px; font-size: 14px; border: 1px solid #ccc;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
     }
     button {
-      margin-top: 10px; background: #4caf50; color: #fff;
-      border: none; cursor: pointer; transition: background-color .3s;
+      background: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color .3s;
     }
     button:hover { background: #45a049; }
     .result {
-      margin-top: 20px; text-align: center; line-height:1.5; font-size:16px;
+      margin-top: 20px;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 16px;
     }
+    footer {
+      margin-top: auto;             /* 남은 공간 밀어내기 */
+      padding: 10px 0;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      width: 100%;
+      background: #f4f4f4;
+    }
+    .text4, .text5 { margin: 2px 0; }
   </style>
 </head>
 <body>
+
+  <!-- 상단 중앙 네비게이션 -->
+  <a href="index.html" class="font1 text1 animation0">Hyangchoon's Page</a>
+  <div class="space1"></div>
+  <div class="space1"></div>
+  <div class="space1"></div>
+  <div class="space1"></div>
+
   <div class="container">
     <h1>작업 완료 일정 계산기</h1>
     <form onsubmit="return false;">
       <label>생산 마을</label>
       <input id="village" placeholder="예: 기류" />
+
       <label>생산 품목</label>
       <input id="product" placeholder="예: 삼색" />
+
       <label>작업량 (게임 기준)</label>
       <input id="workload" type="number" placeholder="예: 90000" />
+
       <label>설정 임금 (100~600원)</label>
       <select id="wage">
         <option value="100">100원</option>
@@ -50,11 +104,17 @@
         <option value="500">500원</option>
         <option value="600" selected>600원</option>
       </select>
+
       <button onclick="calculate()">계산하기</button>
       <button id="saveBtn" onclick="saveTxt()" style="display:none;">결과 저장하기</button>
     </form>
     <div id="calcResult" class="result"></div>
   </div>
+
+  <footer>
+    <p class="text4 space3">© 2025 Hyangchoon | Website Created by Lee Gil-joo</p>
+    <p class="text5">The font design is sourced from Google Fonts.</p>
+  </footer>
 
   <script>
     function pad(n){ return n.toString().padStart(2,'0'); }
@@ -85,7 +145,7 @@
         `시작 날자 : ${startStr}<br>`+
         `완료 날자 : ${endStr}`;
 
-      lastData = { village: v, product: p, end };
+      lastData = { village:v, product:p, end };
       document.getElementById('saveBtn').style.display = 'inline-block';
     }
 
@@ -100,5 +160,6 @@
       a.click();
     }
   </script>
+
 </body>
 </html>
