@@ -133,7 +133,7 @@
 
       const daily = {100:600,200:900,300:1500,400:2400,500:3600,600:5100}[wage];
       const days = wl / daily;
-      const start = new Date(2025,4,4,20,0,0);
+      const start = new Date();
       const end = new Date(start.getTime() + days*24*3600_000);
 
       const startStr = formatGame(start);
