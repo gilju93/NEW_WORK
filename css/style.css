@@ -45,6 +45,14 @@
     margin-top: 50px;
 }
 
+.text5 {
+    /* footer 전용2 text */
+    font-size: 0.9rem;
+    color: black ;
+    text-align: center;
+
+}
+
 /* Make Sapce */
 
 .space1 {
