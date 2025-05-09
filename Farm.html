@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>작업 완료 일정 계산기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex; justify-content: center; align-items: center;
+      height: 100vh; margin: 0; background: #f4f4f4;
+    }
+    .container {
+      background: #fff; padding: 20px; border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 320px;
+      text-align: left;
+    }
+    h1 { text-align: center; margin-bottom: 10px; }
+    form { display: flex; flex-direction: column; gap: 8px; }
+    label { font-size: 14px; }
+    input, select, button {
+      padding: 8px; font-size: 14px; border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 10px; background: #4caf50; color: #fff;
+      border: none; cursor: pointer; transition: background-color .3s;
+    }
+    button:hover { background: #45a049; }
+    .result {
+      margin-top: 20px; text-align: center; line-height:1.5; font-size:16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>작업 완료 일정 계산기</h1>
+    <form onsubmit="return false;">
+      <label>생산 마을</label>
+      <input id="village" placeholder="예: 기류" />
+      <label>생산 품목</label>
+      <input id="product" placeholder="예: 삼색" />
+      <label>작업량 (게임 기준)</label>
+      <input id="workload" type="number" placeholder="예: 90000" />
+      <label>설정 임금 (100~600원)</label>
+      <select id="wage">
+        <option value="100">100원</option>
+        <option value="200">200원</option>
+        <option value="300">300원</option>
+        <option value="400">400원</option>
+        <option value="500">500원</option>
+        <option value="600" selected>600원</option>
+      </select>
+      <button onclick="calculate()">계산하기</button>
+      <button id="saveBtn" onclick="saveTxt()" style="display:none;">결과 저장하기</button>
+    </form>
+    <div id="calcResult" class="result"></div>
+  </div>
+
+  <script>
+    function pad(n){ return n.toString().padStart(2,'0'); }
+    function formatGame(dt){
+      return `${dt.getFullYear()}년 ${pad(dt.getMonth()+1)}월 ${pad(dt.getDate())}일 ${pad(dt.getHours())}시`;
+    }
+
+    let lastData = {};
+
+    function calculate(){
+      const v = document.getElementById('village').value.trim();
+      const p = document.getElementById('product').value.trim();
+      const wl = +document.getElementById('workload').value;
+      const wage = +document.getElementById('wage').value;
+      if(!v||!p||!wl||!wage) return alert('모든 항목을 입력하세요.');
+
+      const daily = {100:600,200:900,300:1500,400:2400,500:3600,600:5100}[wage];
+      const days = wl / daily;
+      const start = new Date(2025,4,4,20,0,0);
+      const end = new Date(start.getTime() + days*24*3600_000);
+
+      const startStr = formatGame(start);
+      const endStr   = formatGame(end);
+
+      document.getElementById('calcResult').innerHTML =
+        `생산 마을 : ${v}<br>`+
+        `생산 품목 : ${p}<br>`+
+        `시작 날자 : ${startStr}<br>`+
+        `완료 날자 : ${endStr}`;
+
+      lastData = { village: v, product: p, end };
+      document.getElementById('saveBtn').style.display = 'inline-block';
+    }
+
+    function saveTxt(){
+      const text = document.getElementById('calcResult').innerText;
+      const dt = lastData.end;
+      const fname = `${lastData.village}_${lastData.product}_${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}${pad(dt.getHours())}.txt`;
+      const blob = new Blob([text], {type:'text/plain'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fname;
+      a.click();
+    }
+  </script>
+</body>
+</html>

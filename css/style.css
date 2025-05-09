@@ -109,12 +109,12 @@
 
 .animation1 {
     opacity: 0;
-    animation: snow-fall 2s ease-out 1.5s forwards;
+    animation: snow-fall 2s ease-out 0.2s forwards;
 }
 
 .animation2 {
     opacity: 0;
-    animation: snow-fall 2s ease-out 3s forwards;
+    animation: snow-fall 2s ease-out 0.5s forwards;
 }
 
 /* transition */
@@ -128,5 +128,17 @@
 
 .txt-tran:hover {
     background-color: antiquewhite;
+    transform: scale(1.05);
+}
+
+.txt-tran2 {
+    /* background-color: antiquewhite; */
+    border-radius: 8px;
+    padding: 8px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.txt-tran2:hover {
+    background-color: rgb(242, 215, 250);
     transform: scale(1.05);
 }
