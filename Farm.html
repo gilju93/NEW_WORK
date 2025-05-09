@@ -149,16 +149,28 @@
       document.getElementById('saveBtn').style.display = 'inline-block';
     }
 
-    function saveTxt(){
-      const text = document.getElementById('calcResult').innerText;
-      const dt = lastData.end;
-      const fname = `${lastData.village}_${lastData.product}_${dt.getFullYear()}${pad(dt.getMonth()+1)}${pad(dt.getDate())}${pad(dt.getHours())}.txt`;
-      const blob = new Blob([text], {type:'text/plain'});
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = fname;
-      a.click();
-    }
+    function pad(n) {
+  return String(n).padStart(2, '0');
+}
+
+function sanitizeFilename(str) {
+  return str.replace(/[\\/:*?"<>|]/g, '_'); // 안전한 파일명 생성
+}
+
+function saveTxt() {
+  const text = document.getElementById('calcResult').innerText;
+  const dt = lastData.end;
+
+  const dateStr = `${dt.getFullYear()}${pad(dt.getMonth() + 1)}${pad(dt.getDate())}${pad(dt.getHours())}`;
+  const fname = `${dateStr}_${sanitizeFilename(lastData.village)}_${sanitizeFilename(lastData.product)}.txt`;
+
+  const blob = new Blob([text], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fname;
+  a.click();
+  URL.revokeObjectURL(a.href); // 메모리 해제
+}
   </script>
 
 </body>
