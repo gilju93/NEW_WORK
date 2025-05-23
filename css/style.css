@@ -90,31 +90,30 @@
 
 
 
-@keyframes snow-fall{
+@keyframes snow-fall {
     0% {
-        transform: translate(-50px, -100px);
         opacity: 0;
+        transform: translateY(-60px);
     }
     100% {
-        transform: translate(0, 0);
         opacity: 1;
+        transform: translateY(0);
     }
-
 }
 
 .animation0 {
     opacity: 0;
-    animation: snow-fall 2s ease-out forwards;
+    animation: snow-fall 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 .animation1 {
     opacity: 0;
-    animation: snow-fall 2s ease-out 0.2s forwards;
+    animation: snow-fall 1.2s 0.2s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 .animation2 {
     opacity: 0;
-    animation: snow-fall 2s ease-out 0.5s forwards;
+    animation: snow-fall 1.2s 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 /* transition */
@@ -141,4 +140,86 @@
 .txt-tran2:hover {
     background-color: rgb(242, 215, 250);
     transform: scale(1.05);
+}
+
+/* Google Fonts 적용 */
+body {
+    font-family: 'Inter', 'Noto Sans KR', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #222;
+}
+
+.header-title {
+    display: block;
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2.5rem 0 1.5rem 0;
+    text-decoration: none;
+    color: #222;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s;
+    border-radius: 12px;
+    padding: 0.5rem 1rem;
+}
+
+.header-title:hover {
+    background: #e6f0fa;
+    color: #0078d7;
+}
+
+.menu-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.menu-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.menu-list.column {
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.menu-link {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #444;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+.menu-link:hover {
+    background: #0078d7;
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0 1rem 0;
+    font-size: 0.95rem;
+    color: #888;
+    background: #f1f1f1;
+    margin-top: 3rem;
+}
+
+.center-wrapper {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
